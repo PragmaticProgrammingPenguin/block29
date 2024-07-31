@@ -17,19 +17,16 @@ export default function AddPuppy(){
             formData.imageUrl = 
             "https://learndotresources.s3.amazonaws.com/workshop/60ad725bbe74cd0004a6cba0/puppybowl-default-dog.png";
         }
-        console.log(formData);
     }
     axios
         .post(`${import.meta.env.VITE_BASE_URL}/players`, formData)
         .then((response) => {
-            console.log(response)
             if(response.data.success){
                 alert("Successfully Added Player")
                 navigate("/")
             }
         })
         .catch((err) => console.log(err));
-    console.log(formData);
     return (
         <>
             <form className="add-puppy-form" onSubmit={handleSubmit}>

@@ -6,7 +6,7 @@ import axios from "axios";
 export default function PuppyCard({ player, parent}){
     const navigate = useNavigate();
     const cardStyles = {
-        width: parent==="details" ? "90%" : "27%",
+        width: parent ==="details" ? "90%" : "27%",
         margin: parent === "details" ? "0 auto " : null,
     }
 
@@ -14,7 +14,6 @@ export default function PuppyCard({ player, parent}){
         axios
             .delete(`${import.meta.env.VITE_BASE_URL}/players/${id}`)
             .then((response) => {
-                console.log(response)
                 if (response.data.success) {
                     alert("Player successfully removed from roster!")
                     navigate("/")
@@ -32,7 +31,9 @@ export default function PuppyCard({ player, parent}){
             {parent === "details" && <p>ID: {player?.id}</p>}
 
             {parent === "details" ? (
-                <button onClick={() => removePlayer(player?.id)}>Remove Player from Roster</button>
+                <button onClick={() => removePlayer(player?.id)}>
+                    Remove Player from Roster
+                </button>
             ) : (
             <button onClick={() => navigate(`/details/${player?.id}`)}>
                 See Details

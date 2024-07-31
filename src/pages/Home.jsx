@@ -5,13 +5,12 @@ import axios from "axios"
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
-export default function Home(){
+export default function Home({ token, setToken }){
   const [players, setPlayers] = useState([])
   const [playersToShow, setPlayersToShow] = useState([])
   useEffect(() => {
     axios(`${BASE_URL}/players`)
       .then((data) => {
-        console.log(data.data.data.players)
         setPlayers(data.data.data.players)
         setPlayersToShow(data.data.data.players)
       })
@@ -19,19 +18,28 @@ export default function Home(){
   }, [])
   
   const playerSearch = (e) => {
-    console.log(e.target.value)
     const searchResults = players.filter((player) => 
       player.name.toLowerCase().includes(e.target.value.toLowerCase())
     )
     setPlayersToShow(searchResults)
-    console.log(searchResults)
-    console.log(players)
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem("token")
+    setToken(null)
   }
 
   return (
     <div>
-        <Link to="/addPlayer">Add a Player</Link>
-        <h1>Puppy Bowl</h1>
+        {token ? (
+          <>
+            <Link to="/addPlayer">Add a Player</Link>
+            <button onClick={handleLogout}>Logout</button>
+          </>
+        ) : (
+          <Link to="/login">Login</Link>
+        )}
+        <h1>Puppy Bowl {token}</h1>
         <label>
           Search for a player by name:
           <input type="text" onChange={playerSearch} />
