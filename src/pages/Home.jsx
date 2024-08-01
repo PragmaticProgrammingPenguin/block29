@@ -39,7 +39,7 @@ export default function Home({ token, setToken }){
         ) : (
           <Link to="/login">Login</Link>
         )}
-        <h1>Puppy Bowl {token}</h1>
+        <h1>Puppy Bowl</h1>
         <label>
           Search for a player by name:
           <input type="text" onChange={playerSearch} />

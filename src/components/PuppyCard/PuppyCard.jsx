@@ -3,23 +3,23 @@ import { useNavigate } from "react-router-dom";
 import "./PuppyCard.css";
 import axios from "axios";
 
-export default function PuppyCard({ player, parent}){
+export default function PuppyCard({ player, parent }){
     const navigate = useNavigate();
     const cardStyles = {
-        width: parent ==="details" ? "90%" : "27%",
-        margin: parent === "details" ? "0 auto " : null,
+        width: parent === "details" ? "90%" : "27%",
+        margin: parent === "details" ? "0 auto" : null,
     }
 
     const removePlayer = (id) => {
-        axios
-            .delete(`${import.meta.env.VITE_BASE_URL}/players/${id}`)
-            .then((response) => {
-                if (response.data.success) {
-                    alert("Player successfully removed from roster!")
-                    navigate("/")
-                }
-            })
-            .catch((err) => console.log(err))
+    axios
+        .delete(`${import.meta.env.VITE_BASE_URL}/players/${id}`)
+        .then((response) => {
+          if (response.data.success) {
+            alert("Player successfully removed from roster!")
+            navigate("/")
+          }
+        })
+        .catch((err) => console.log(err))
     }
 
     return (
